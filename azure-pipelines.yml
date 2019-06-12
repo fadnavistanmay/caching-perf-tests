@@ -6,10 +6,16 @@ jobs:
         POOL: Hosted Ubuntu 1604
       windows:
         POOL: Hosted Windows 2019 with VS2019
+      windows-nocache:
+        POOL: Hosted Windows 2019 with VS2019
+        USE_CACHE: FALSE
       macOS:
         POOL: Hosted macOS
       privateagent:
         POOL: jerick-normal
+      privateagent-nocache:
+        POOL: jerick-normal
+        USE_CACHE: FALSE
   pool:
     name: $(POOL)
   variables:  
@@ -27,6 +33,7 @@ jobs:
         $(Agent.OS)
       path: '$(YARN_CACHE_FOLDER)'
       cacheHitVar: 'CacheRestored'
+    condition: ne(variables['USE_CACHE'], 'FALSE')
 
   - script: yarn --pure-lockfile
     displayName: 'Install dependencies'
