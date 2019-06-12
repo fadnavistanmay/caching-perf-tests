@@ -27,7 +27,7 @@ jobs:
         $(Agent.OS)
       path: '$(YARN_CACHE_FOLDER)'
 
-  - script: yarn
+  - script: yarn --pure-lockfile
     displayName: 'Install dependencies'
 
 #  - script: yarn build
