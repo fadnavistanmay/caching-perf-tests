@@ -4,6 +4,9 @@ jobs:
     matrix:
       linux:
         POOL: Hosted Ubuntu 1604
+      linux-nocache:
+        POOL: Hosted Ubuntu 1604
+        USE_CACHE: FALSE
       windows:
         POOL: Hosted Windows 2019 with VS2019
       windows-nocache:
@@ -11,6 +14,9 @@ jobs:
         USE_CACHE: FALSE
       macOS:
         POOL: Hosted macOS
+      macOS-nocache:
+        POOL: Hosted macOS
+        USE_CACHE: FALSE
       privateagent:
         POOL: jerick-normal
       privateagent-nocache:
@@ -47,7 +53,7 @@ jobs:
         $(System.DefaultWorkingDirectory)/yarn.lock
         $(Agent.OS)
       path: '$(YARN_CACHE_FOLDER)'
-    condition: ne(variables['PipelineCache.CacheRestored'], 'True')
+    condition: and(ne(variables['USE_CACHE'], 'FALSE'), ne(variables['PipelineCache.CacheRestored'], 'True'))
 
   - script: |
       IF EXIST "%YARN_CACHE_FOLDER%" rmdir /s /q "%YARN_CACHE_FOLDER%"
