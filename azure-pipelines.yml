@@ -57,5 +57,6 @@ jobs:
 
   - script: |
       IF EXIST "%YARN_CACHE_FOLDER%" rmdir /s /q "%YARN_CACHE_FOLDER%"
+      IF EXIST "node_modules" rmdir /s /q "node_modules"
     condition: eq(variables['POOL'], 'jerick-normal')
     displayName: cleanup
