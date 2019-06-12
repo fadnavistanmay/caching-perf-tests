@@ -58,7 +58,7 @@ jobs:
         $(System.DefaultWorkingDirectory)/yarn.lock
         $(Agent.OS)
       path: '$(YARN_CACHE_FOLDER)'
-    condition: and(ne(variables['USE_CACHE'], 'FALSE'), ne(variables['PipelineCache.CacheRestored'], 'True'))
+    condition: and(succeeded(), and(ne(variables['USE_CACHE'], 'FALSE'), ne(variables['PipelineCache.CacheRestored'], 'True')))
 
   - script: |
       IF EXIST "%YARN_CACHE_FOLDER%" rmdir /s /q "%YARN_CACHE_FOLDER%"
