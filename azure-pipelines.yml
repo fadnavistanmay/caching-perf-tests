@@ -20,13 +20,13 @@ jobs:
       versionSpec: '10.x'
     displayName: 'Use Node.js 10'
 
-
   - task: RestoreCache@0
     inputs:
       key: |
         $(System.DefaultWorkingDirectory)/yarn.lock
         $(Agent.OS)
       path: '$(YARN_CACHE_FOLDER)'
+      cacheHitVar: 'CacheRestored'
 
   - script: yarn --pure-lockfile
     displayName: 'Install dependencies'
@@ -40,6 +40,7 @@ jobs:
         $(System.DefaultWorkingDirectory)/yarn.lock
         $(Agent.OS)
       path: '$(YARN_CACHE_FOLDER)'
+    condition: ne(variables['CacheRestored'], 'True')
 
   - script: |
       IF EXIST "%USERPROFILE%\.yarnrc" del /q "%USERPROFILE%\.yarnrc"
