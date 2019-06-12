@@ -40,8 +40,10 @@ jobs:
   - task: RestoreCache@0
     inputs:
       key: |
+        $(System.DefaultWorkingDirectory)/salt.txt
         $(System.DefaultWorkingDirectory)/yarn.lock
         $(Agent.OS)
+        $(Agent.JobName)
       path: '$(YARN_CACHE_FOLDER)'
       cacheHitVar: 'CacheRestored'
     condition: ne(variables['USE_CACHE'], 'FALSE')
@@ -55,8 +57,10 @@ jobs:
   - task: SaveCache@0
     inputs:
       key: |
+        $(System.DefaultWorkingDirectory)/salt.txt
         $(System.DefaultWorkingDirectory)/yarn.lock
         $(Agent.OS)
+        $(Agent.JobName)
       path: '$(YARN_CACHE_FOLDER)'
     condition: and(succeeded(), and(ne(variables['USE_CACHE'], 'FALSE'), ne(variables['PipelineCache.CacheRestored'], 'True')))
 
