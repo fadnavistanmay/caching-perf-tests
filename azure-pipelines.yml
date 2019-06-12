@@ -4,25 +4,21 @@ jobs:
     matrix:
       linux:
         POOL: Hosted Ubuntu 1604
-        YARN_OPTIONS: --offline
       linux-nocache:
         POOL: Hosted Ubuntu 1604
         USE_CACHE: FALSE
       windows:
         POOL: Hosted Windows 2019 with VS2019
-        YARN_OPTIONS: --offline
       windows-nocache:
         POOL: Hosted Windows 2019 with VS2019
         USE_CACHE: FALSE
       macOS:
         POOL: Hosted macOS
-        YARN_OPTIONS: --offline
       macOS-nocache:
         POOL: Hosted macOS
         USE_CACHE: FALSE
       privateagent:
         POOL: jerick-normal
-        YARN_OPTIONS: --offline
       privateagent-nocache:
         POOL: jerick-normal
         USE_CACHE: FALSE
@@ -48,7 +44,7 @@ jobs:
       cacheHitVar: 'CacheRestored'
     condition: ne(variables['USE_CACHE'], 'FALSE')
 
-  - script: yarn --frozen-lockfile $(YARN_OPTIONS)
+  - script: yarn --frozen-lockfile
     displayName: 'Install dependencies'
 
 #  - script: yarn build
