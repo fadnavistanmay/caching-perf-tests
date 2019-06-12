@@ -41,7 +41,7 @@ jobs:
       cacheHitVar: 'CacheRestored'
     condition: ne(variables['USE_CACHE'], 'FALSE')
 
-  - script: yarn --frozen-lockfile
+  - script: yarn --frozen-lockfile --offline
     displayName: 'Install dependencies'
 
 #  - script: yarn build
