@@ -43,8 +43,6 @@ jobs:
     condition: ne(variables['CacheRestored'], 'True')
 
   - script: |
-      IF EXIST "%USERPROFILE%\.yarnrc" del /q "%USERPROFILE%\.yarnrc"
-      IF EXIST "%APPDATA%\npm" rmdir /s /q "%APPDATA%\npm"
-      IF EXIST "%LOCALAPPDATA%\Yarn" rmdir /s /q "%LOCALAPPDATA%\Yarn"
+      IF EXIST "%YARN_CACHE_FOLDER%" rmdir /s /q "%YARN_CACHE_FOLDER%"
     condition: eq(variables['POOL'], 'jerick-normal')
     displayName: cleanup
