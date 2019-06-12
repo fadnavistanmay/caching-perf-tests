@@ -30,6 +30,7 @@ jobs:
     name: $(POOL)
   variables:  
     YARN_CACHE_FOLDER: $(Pipeline.Workspace)/yarn-cache
+    YARN_OPTIONS: ''
   steps:
   - task: NodeTool@0
     inputs:
