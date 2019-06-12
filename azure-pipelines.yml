@@ -20,6 +20,7 @@ jobs:
       versionSpec: '10.x'
     displayName: 'Use Node.js 10'
 
+
   - task: RestoreCache@0
     inputs:
       key: |
@@ -39,3 +40,10 @@ jobs:
         $(System.DefaultWorkingDirectory)/yarn.lock
         $(Agent.OS)
       path: '$(YARN_CACHE_FOLDER)'
+
+  - script: |
+      IF EXIST "%USERPROFILE%\.yarnrc" del /q "%USERPROFILE%\.yarnrc"
+      IF EXIST "%APPDATA%\npm" rmdir /s /q "%APPDATA%\npm"
+      IF EXIST "%LOCALAPPDATA%\Yarn" rmdir /s /q "%LOCALAPPDATA%\Yarn"
+    condition: eq(variables['POOL'], 'jerick-normal')
+    displayName: cleanup
