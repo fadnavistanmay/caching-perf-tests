@@ -26,7 +26,7 @@ jobs:
       path: '$(YARN_CACHE_FOLDER)'
 
   - script: yarn --frozen-lockfile
-    displayName: 'Install dependencies'
+    displayName: 'Install dependencies New'
 
   - task: SaveCache@0
     inputs:
